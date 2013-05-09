@@ -1,0 +1,104 @@
+{"method": "server.banner", "id": 1, "params": []}
+{"result": "hello", "error": null, "id": 1}
+
+{"method": "server.peers.subscribe", "id": 1, "params": []}
+{"id": 1, "result":
+  [
+    ["199.48.69.245", "california.stratum.bitcoin.cz",
+      ["v0.1", "t50001", "h8081"]],
+    ["93.187.142.114", "electrum.novit.ro",
+      ["v0.1", "t50001", "h8081"]],
+    ["92.240.248.99", "electrum.bitcoins.sk",
+      ["v0.1", "t50001", "h8081"]],
+    ["66.172.10.12", "uncle-enzo.info",
+      ["v0.1", "t50001", "h8081"]],
+    ["176.9.206.164", "176.9.206.164",
+      ["v0.1", "t50001", "h8081"]]
+  ]
+}
+
+{"method": "blockchain.address.subscribe", "id": 1, "params": ["1Afgoy1AoSMW5U7pgiMEDM98dpuLbTFNy1"]}
+{"id": 1, "result": "1e0234c8d04df4e054d497a3ba98fa8d9c5826e8441c17f4efb7d368efece30e"}
+{"params": ["1Afgoy1AoSMW5U7pgiMEDM98dpuLbTFNy1", "d7f88de2bafbe42fa23a79b8f012b89c1efb3e4c3fee8769bac5f4f456b1ff5b"], "id": null, "method": "blockchain.address.subscribe"}
+
+Or if the address is unused:
+
+{"id": 1, "result": null}
+
+The 2nd param is a hash of the history. You check this hash against your
+stored history to see whether an update is needed.
+
+    def get_status(history):
+        status = ""
+        for tx_hash, height in history:
+            status += tx_hash + ":%d:" % height
+        return hashlib.sha256(status).hexdigest()
+
+{"method": "blockchain.address.get_history", "id": 1, "params": ["1C3tTTBs74tnipMb1qySVyTqQRkbdEpnDY"]}
+{"id": 1, "result": 
+    [
+        {"tx_hash": "d298769f1f007fc381915add47035a7c988a10cb8f7c40056ebd1d9dac4957e2", "height": 232772},
+        {"tx_hash": "7f8dbf65ccec5f824760baecd5eab4b275a4d977aa93da2c7ccfe022e18123e4", "height": 231626},
+        {"tx_hash": "161dfa7c4c447ee7fdb0e03c6b1d8b28152f6ce32aa5f6aa9593d1e6c9e5be68", "height": 231477},
+        {"tx_hash": "cb39540cc6ec72e30e93e7e7e68f704ba188e2296fd7d6de3fb3fe036aa3307f", "height": 232759},
+        {"tx_hash": "258b6a43562670bd606c973295b3ea5a98716d146cd68bc38194f1bf097a15a2", "height": 232759}, 
+        {"tx_hash": "ef23245456d934166fa68c9fba6def0f39400052b07d9324aa660ab97b535860", "height": 234250},
+        {"tx_hash": "aabadbb99398aa8079e5f45c14c2c15f4c190c2a54deff83da6691add13323ce", "height": 228129},
+        {"tx_hash": "d951393884ab4cbb50d02cb0d2763093adb366144c05e88c31c95d0110793161", "height": 232759},
+        {"tx_hash": "b7f229600715831f417e83a4be61ab6d63eeb926279bad17c04cb172fc073187", "height": 231453},
+        {"tx_hash": "f48905a1db7ca4a0baa3d55afee96cdd20a28a8b7ad419744fe55c2bc93d2697", "height": 228081},
+        {"tx_hash": "9dc5023d118976445672a51748e195e4976d0bd52296d8252b883aeb40b2b581", "height": 232791},
+        {"tx_hash": "8c1db285a80184da1fe48cd62ed10613d8fb3c1952170139469fb28a271402f5", "height": 232773},
+        {"tx_hash": "3cdf06b0b6867f9c128a310a9d5fd4a6a82c7da9e9f5ed7351e5b700e22163fb", "height": 232773},
+        {"tx_hash": "8b00c8f6913e47018203a9d0f9a3d62d31c46813577fc649c83c0d1b99c16a7b", "height": 232744},
+        {"tx_hash": "9efc01aeec7e98b853846eaf522caf93125085328dfe1d19cba48fdc79453c4e", "height": 231741},
+        {"tx_hash": "ceab006b8ff80d1fcfa95feacb0a192b8b5c7ab9b7e8e131b031d2b39a0a1f79", "height": 232773},
+        {"tx_hash": "9f4de7103c73d36d52246bb246065c892aacbe6fcdc80b9e6c943b3ac83fca71", "height": 231274}
+    ]
+}
+
+{"method": "blockchain.transaction.broadcast", "id": 1, "params": ["0987a4"]}
+{"result": "txhash", "error": null, "id": 1}
+
+{"method": "blockchain.numblocks.subscribe", "id": 1, "params": []}
+{"result": 10988, "id": 1}
+{"method": "blockchain.numblocks.subscribe", "id": null, "params": [10989]}
+
+{"method": "server.version", "id": 1, "params": ["1.7.3", "0.6"]}
+{"id": 1, "result": "0.8"}
+
+{"params": [], "id": 3, "method": "blockchain.headers.subscribe"}
+{"id": 3, "result":
+    {
+        "nonce": 3621203529,
+        "prev_block_hash": "000000000000006952a7545d10d7815f43636a84db923918b81d36762479735d",
+        "timestamp": 1368107555,
+        "merkle_root": "d4c6892cea1a4fca49c1fd98ecd6b200c3cad6a5cfed197a28cec3d6982a5325",
+        "block_height": 235321,
+        "version": 2,
+        "bits": 436316733
+    }
+}
+{
+    "params":
+    [
+        {
+            "nonce": 1925225330,
+            "prev_block_hash": "000000000000008ba44bd6d0b48db5465e25ef73e22952d46abe03304e38f4c5",
+            "timestamp": 1368108660,
+            "merkle_root": "51bf3e2dd5e790f6678f42b780da650e50cec11b72bc6488ad2e3ef37ed7da1c",
+            "block_height": 235322,
+            "version": 2,
+            "bits": 436316733
+        }
+    ], 
+    "id": null,
+    "method": "blockchain.headers.subscribe"
+}
+
+{"method": "blockchain.transaction.get", "id": 4, "params": ["7f8dbf65ccec5f824760baecd5eab4b275a4d977aa93da2c7ccfe022e18123e4", 231626]}
+{"id": 4, "result": "0100... tx data ... 0000"}
+
+{"method": "blockchain.block.get_chunk", "id": 4, "params": [235323]}
+???
+
